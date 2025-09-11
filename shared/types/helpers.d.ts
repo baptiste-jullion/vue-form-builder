@@ -8,7 +8,7 @@ type LeafTypes = Date | Function | RegExp;
 export type DeepKeyOf<T>
   = T extends Primitive | LeafTypes ? never
     : T extends (infer U)[]
-      ? `${number}` | `${number}.${DeepKeyOf<U>}`
+      ? `${number}` | "{number}" | `${number}.${DeepKeyOf<U>}` | `{number}.${DeepKeyOf<U>}`
       : {
           [K in keyof T & (string | number)]:
           T[K] extends Primitive | LeafTypes
@@ -19,3 +19,5 @@ export type DeepKeyOf<T>
                 ? K | `${K}.${DeepKeyOf<T[K]>}`
                 : K
         }[keyof T & (string | number)];
+
+export type Arrayable<T> = T | T[];

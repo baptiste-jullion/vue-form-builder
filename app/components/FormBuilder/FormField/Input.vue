@@ -1,23 +1,24 @@
 <script setup lang="ts" generic="
-InputType extends FormFieldInputsKeys,
-Context extends { schema?: ZodType<any>, form: Record<string, string>},
-Keys extends DeepKeyOf<z.infer<NonNullable<Context['schema']>>>
+Context extends FormContext,
+Keys extends FormContextKeys<Context>,
+InputPropsGeneric = unknown
 "
 >
-import type { z, ZodType } from "zod";
-import type { FormFieldInputsInterface } from "../../../../shared/types/useForm";
-// import { FormFieldInputs } from "../../../../shared/types/useForm";
+import type { FieldPropSet, FormContext, FormContextKeys } from "../types";
+import { FormFieldInputs } from "../types";
 
-defineProps<{
-  type: FormFieldInputsInterface[InputType]
-  ctx: Context
-  path: Keys
-}>();
+defineProps<
+  FieldPropSet<InputPropsGeneric> & {
+    ctx: Context
+    path: Keys
+  }
+>();
 </script>
 
 <template>
-  <input v-model="ctx.form[path]" type="text">
-  <!-- <component
+  <component
     :is="FormFieldInputs[type]"
-  /> -->
+    v-bind="props"
+    v-model="ctx.form[path]"
+  />
 </template>

@@ -1,6 +1,13 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="
+Context extends FormContext,
+Keys extends FormContextKeys<Context>,
+"
+>
+import type { FormContext, FormContextKeys } from "../types";
+
 defineProps<{
-  path: string
+  ctx: Context
+  path: Keys
 }>();
 </script>
 

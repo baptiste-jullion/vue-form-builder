@@ -1,17 +1,19 @@
 <script setup lang="ts" generic="Option extends AllowedOptionTypes | Record<string, AllowedOptionTypes>">
 export type AllowedOptionTypes = string | number | Date | unknown;
 
-interface SelectProps {
-  options: Option[]
-  optionLabel?: Option extends object ? keyof Option : never
-  optionValue?: Option extends object ? keyof Option : never
+export interface SelectProps<Data> {
+  options: Data[]
+  optionLabel?: Data extends Record<string, unknown> ? keyof Data : never
+  optionValue?: Data extends Record<string, unknown> ? keyof Data : never
 }
 
-defineProps<SelectProps>();
+defineProps<SelectProps<Option>>();
+
+const model = defineModel<Option>();
 </script>
 
 <template>
-  <select>
+  <select v-model="model">
     <option
       v-for="(option, index) in options"
       :key="index"

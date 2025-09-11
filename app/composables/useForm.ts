@@ -1,8 +1,8 @@
-import type z from "zod";
+import type { ZodType } from "zod";
 
 interface UseFormArgs<T> {
   initialValues?: DeepPartial<T>
-  schema?: z.ZodSchema<T>
+  schema?: ZodType<T>
 }
 
 export default function useForm<T extends object>(args: UseFormArgs<T>) {

@@ -1,22 +1,21 @@
-<script setup lang="ts">
-import type { InputTypeHTMLAttribute } from "vue";
+<script setup lang="ts" generic="
+Context extends FormContext,
+Keys extends FormContextKeys<Context>,
+InputPropsGeneric = unknown
+"
+>
+import type { FieldPropSet, FormContext, FormContextKeys } from "./types";
 
-defineProps<{
-  type: InputTypeHTMLAttribute
-  props?: any
-  emits?: any
-  path: string
-  ctx: any
+const props = defineProps<FieldPropSet<InputPropsGeneric> & {
+  ctx: Context
+  path: Keys
 }>();
 </script>
 
 <template>
-  <FormBuilderFormFieldLabel :path />
+  <FormBuilderFormFieldLabel :path :ctx />
   <FormBuilderFormFieldInput
-    :type
     v-bind="{ ...props }"
-    :ctx
-    :path
   />
-  <FormBuilderFormFieldErrors :path />
+  <FormBuilderFormFieldErrors :path :ctx />
 </template>
