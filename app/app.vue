@@ -34,9 +34,10 @@ const { form, ctx } = useForm({
     birthdate: new Date("1990-01-01"),
     isActive: true,
     hobbies: "gaming",
+    height: 175,
     address: {
       street: "123 Main St",
-      city: "Anytown",
+      city: "city_a",
       state: "CA",
       zip: "12345",
     },
@@ -106,7 +107,8 @@ const { form, ctx } = useForm({
         type="Select"
         :props="{
           options: [{ label: 'City A', value: 'city_a' }, { label: 'City B', value: 'city_b' }],
-          optionValue: 'label',
+          optionValue: 'value',
+          optionLabel: 'label',
         }"
         :ctx
         path="address.city"
