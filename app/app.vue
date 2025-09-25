@@ -53,70 +53,70 @@ const { form, ctx } = useForm({
 </script>
 
 <template>
-  <FormBuilderForm v-model="form">
-    <FormBuilderFormFieldInput
-      :ctx
-      type="Select"
-      path="hobbies"
-      :props="{
-        options: ['reading', 'gaming', 'cooking', 'traveling', 1],
-      }"
-    />
-    <FormBuilderFormField
-      :ctx
-      type="Text"
-      path="name"
-    />
-    <FormBuilderFormField
-      :ctx
-      type="Text"
-      path="height"
-      :initial="180"
-    />
-    <FormBuilderFormField
-      :ctx
-      type="Date"
-      path="birthdate"
-      :props="{ max: new Date().toISOString().split('T')[0] }"
-    />
-    <FormBuilderFormField
-      :ctx
-      type="Text"
-      path="isActive"
-      :emits="{
-        change: (value: boolean) => console.log('Checkbox changed:', value),
-      }"
-    />
-    <FormBuilderFormField
-      :ctx
-      type="Select"
-      path="hobbies"
-      :props="{
-        options: [{ label: 'Reading', value: 'reading' }, { label: 'Gaming', value: 'gaming' }],
-        optionLabel: 'label',
-        optionValue: 'value',
-      }"
-    />
-    <div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr;">
+    <FormBuilderForm v-model="form">
+      <FormBuilderFormFieldInput
+        :ctx
+        type="Select"
+        path="hobbies"
+        :props="{
+          options: ['reading', 'gaming', 'cooking', 'traveling', 1],
+        }"
+      />
       <FormBuilderFormField
         :ctx
         type="Text"
-        path="address.street"
+        path="name"
       />
-      <FormBuilderFormFieldInput
-        type="Select"
-        :props="{
-          options: [{ label: 'City A', value: 'city_a' }, { label: 'City B', value: 'city_b' }],
-          optionValue: 'value',
-          optionLabel: 'label',
-        }"
+      <FormBuilderFormField
         :ctx
-        path="address.city"
+        type="Text"
+        path="height"
+        :initial="180"
       />
-    </div>
-  </FormBuilderForm>
+      <FormBuilderFormField
+        :ctx
+        type="Date"
+        path="birthdate"
+        :props="{ max: new Date().toISOString().split('T')[0] }"
+      />
+      <FormBuilderFormField
+        :ctx
+        type="Text"
+        path="isActive"
+        :emits="{
+          change: (value: boolean) => console.log('Checkbox changed:', value),
+        }"
+      />
+      <FormBuilderFormField
+        :ctx
+        type="Select"
+        path="hobbies"
+        :props="{
+          options: [{ label: 'Reading', value: 'reading' }, { label: 'Gaming', value: 'gaming' }],
+          optionLabel: 'label',
+          optionValue: 'value',
+        }"
+      />
+      <div>
+        <FormBuilderFormField
+          :ctx
+          type="Text"
+          path="address.street"
+        />
+        <FormBuilderFormFieldInput
+          type="Select"
+          :props="{
+            options: [{ label: 'City A', value: 'city_a' }, { label: 'City B', value: 'city_b' }],
+            optionValue: 'value',
+            optionLabel: 'label',
+          }"
+          :ctx
+          path="address.city"
+        />
+      </div>
+    </FormBuilderForm>
 
-  <InputsSelect :options="[{ label: 'label', value: 'value' }]" option-label="label" />
-
-  <pre>{{ ctx.form }}</pre>
+    <pre>{{ ctx.form }}</pre>
+  </div>
 </template>
