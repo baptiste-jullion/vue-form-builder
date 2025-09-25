@@ -1,6 +1,5 @@
 <script setup lang="ts">
 export interface TextProps {
-  foo: string
 }
 
 const props = defineProps<TextProps>();
