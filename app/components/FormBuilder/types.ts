@@ -19,6 +19,6 @@ export type FieldPropSet<I = unknown>
     | { type: "Text", props?: TextProps }
     | { type: "Date", props?: DateProps };
 
-export interface FormContext { schema?: ZodType<any>, form: Record<string, string> }
+export interface FormContext { schema?: ZodType<object>, form: Record<string, string> }
 
 export type FormContextKeys<Context extends FormContext> = DeepKeyOf<z.infer<NonNullable<Context["schema"]>>>;
