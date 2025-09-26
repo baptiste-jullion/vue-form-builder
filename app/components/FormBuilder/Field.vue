@@ -4,7 +4,7 @@ Keys extends FormContextKeys<Context>,
 InputPropsGeneric = unknown
 "
 >
-import type { FieldPropSet, FormContext, FormContextKeys } from "./types";
+import type { FieldPropSet, FormContext, FormContextKeys } from "~/components/FormBuilder/types";
 
 const props = defineProps<FieldPropSet<InputPropsGeneric> & {
   ctx: Context
@@ -13,9 +13,9 @@ const props = defineProps<FieldPropSet<InputPropsGeneric> & {
 </script>
 
 <template>
-  <FormBuilderFormFieldLabel :path :ctx />
-  <FormBuilderFormFieldInput
+  <FormBuilderFieldLabel :path :ctx />
+  <FormBuilderFieldInput
     v-bind="{ ...props }"
   />
-  <FormBuilderFormFieldErrors :path :ctx />
+  <FormBuilderFieldErrors :path :ctx />
 </template>

@@ -8,7 +8,8 @@ ModelValue = unknown
 import type { FieldPropSet, FormContext, FormContextKeys } from "~/components/FormBuilder/types";
 import * as _ from "lodash-es";
 
-import { FormFieldInputs } from "~/components/FormBuilder/types";
+import z from "zod";
+import { FieldInputs } from "~/components/FormBuilder/types";
 
 const { ctx, path } = defineProps<
   FieldPropSet<InputPropsGeneric> & {
@@ -22,26 +23,41 @@ function onValueChange(newValue: ModelValue) {
 
   if (validator) {
     if (validator.safeParse(null).success && newValue === "") {
-      _.set(ctx.form, path, null);
+      _.set(ctx.values, path, null);
     }
     else if (validator.safeParse(undefined).success && newValue === "") {
-      _.set(ctx.form, path, undefined);
+      _.set(ctx.values, path, undefined);
     }
     else {
-      _.set(ctx.form, path, newValue);
+      _.set(ctx.values, path, newValue);
     }
   }
   else {
-    _.set(ctx.form, path, newValue);
+    _.set(ctx.values, path, newValue);
+  }
+
+  validate();
+}
+
+function validate() {
+  const validator = getValidatorByPath(ctx.schema, path);
+  if (validator) {
+    const error = validator.safeParse(_.get(ctx.values, path)).error;
+    if (error) {
+      _.set(ctx.errors, path, z.treeifyError(error).errors);
+    }
+    else {
+      _.unset(ctx.errors, path);
+    }
   }
 }
 </script>
 
 <template>
   <component
-    :is="FormFieldInputs[type]"
+    :is="FieldInputs[type]"
     v-bind="props"
-    :model-value="_.get(ctx.form, path)"
+    :model-value="_.get(ctx.values, path)"
     v-on="{ ...emits }"
     @update:model-value="onValueChange"
   />

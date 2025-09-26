@@ -3,7 +3,7 @@ Context extends FormContext,
 Keys extends FormContextKeys<Context>,
 "
 >
-import type { FormContext, FormContextKeys } from "../types";
+import type { FormContext, FormContextKeys } from "~/components/FormBuilder/types";
 
 defineProps<{
   ctx: Context
@@ -12,5 +12,5 @@ defineProps<{
 </script>
 
 <template>
-  <p>errors: {{ path }}</p>
+  <p>label: {{ path }}</p>
 </template>

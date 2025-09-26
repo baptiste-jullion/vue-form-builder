@@ -1,24 +1,26 @@
 import type { ZodType } from "zod";
 import { ZodObject } from "zod";
 
-interface UseFormArgs<T> {
-  initialValues?: DeepPartial<T>
-  schema?: ZodType<T>
-}
-
-export default function useForm<T extends object>(args: UseFormArgs<T>) {
-  const form = reactive({ ...args.initialValues });
+export default function useForm<T extends object>(
+  options: UseFormOptions<T>,
+) {
+  const values = reactive({ ...options.initialValues });
+  const errors = reactive({});
 
   return {
-    form,
+    values,
     ctx: {
-      schema: args.schema,
-      form,
+      schema: options.schema,
+      values,
+      errors,
     },
   };
 }
 
-export function getValidatorByPath<T extends object>(schema: ZodType<T> | undefined, path: string) {
+export function getValidatorByPath<T extends object>(
+  schema: ZodType<T> | undefined,
+  path: string,
+) {
   if (!schema)
     return null;
 

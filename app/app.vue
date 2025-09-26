@@ -12,6 +12,7 @@ const schema = z.object({
     city: z.string().min(1, "City is required"),
     state: z.string().min(2, "State must be at least 2 characters"),
     zip: z.string().length(5, "Zip code must be exactly 5 characters").nullish(),
+    foo: z.string().min(1),
   }),
   preferences: z.object({
     notifications: z.array(z.object({
@@ -28,7 +29,7 @@ const schema = z.object({
   }
 });
 
-const { form, ctx } = useForm({
+const { values, ctx } = useForm({
   initialValues: {
     name: "John",
     birthdate: new Date("1990-01-01"),
@@ -49,13 +50,20 @@ const { form, ctx } = useForm({
     },
   },
   schema,
+  config: {
+    validation: {
+      trigger: {
+
+      },
+    },
+  },
 });
 </script>
 
 <template>
   <div style="display: grid; grid-template-columns: 1fr 1fr;">
-    <FormBuilderForm v-model="form">
-      <FormBuilderFormFieldInput
+    <FormBuilderForm v-model="values">
+      <FormBuilderFieldInput
         :ctx
         type="Select"
         path="hobbies"
@@ -63,17 +71,17 @@ const { form, ctx } = useForm({
           options: ['reading', 'gaming', 'cooking', 'traveling', 1, null],
         }"
       />
-      <FormBuilderFormField
+      <FormBuilderField
         :ctx
         type="Text"
         path="name"
       />
-      <FormBuilderFormField
+      <FormBuilderField
         :ctx
         type="Text"
         path="name"
       />
-      <FormBuilderFormField
+      <FormBuilderField
         :ctx
         type="Number"
         path="height"
@@ -81,17 +89,22 @@ const { form, ctx } = useForm({
           step: 10,
         }"
       />
-      <FormBuilderFormField
+      <FormBuilderField
         :ctx
         type="Date"
         path="birthdate"
       />
-      <FormBuilderFormField
+      <FormBuilderField
         :ctx
         type="Checkbox"
         path="isActive"
       />
-      <FormBuilderFormField
+      <FormBuilderField
+        :ctx
+        type="Text"
+        path="address.foo"
+      />
+      <FormBuilderField
         :ctx
         type="Select"
         path="hobbies"
@@ -102,12 +115,12 @@ const { form, ctx } = useForm({
         }"
       />
       <div>
-        <FormBuilderFormField
+        <FormBuilderField
           :ctx
           type="Text"
           path="address.street"
         />
-        <FormBuilderFormFieldInput
+        <FormBuilderFieldInput
           type="Select"
           :props="{
             options: [{ label: 'City A', value: 'city_a' }, { label: 'City B', value: 'city_b' }],
@@ -118,8 +131,9 @@ const { form, ctx } = useForm({
           path="address.city"
         />
       </div>
+      <FormBuilderFieldErrors :ctx path="name" />
     </FormBuilderForm>
 
-    <pre>{{ ctx.form }}</pre>
+    <pre>{{ { formValues: ctx.values, errors: ctx.errors } }}</pre>
   </div>
 </template>
