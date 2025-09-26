@@ -60,7 +60,7 @@ const { form, ctx } = useForm({
         type="Select"
         path="hobbies"
         :props="{
-          options: ['reading', 'gaming', 'cooking', 'traveling', 1],
+          options: ['reading', 'gaming', 'cooking', 'traveling', 1, null],
         }"
       />
       <FormBuilderFormField
@@ -71,22 +71,25 @@ const { form, ctx } = useForm({
       <FormBuilderFormField
         :ctx
         type="Text"
+        path="name"
+      />
+      <FormBuilderFormField
+        :ctx
+        type="Number"
         path="height"
-        :initial="180"
+        :props="{
+          step: 10,
+        }"
       />
       <FormBuilderFormField
         :ctx
         type="Date"
         path="birthdate"
-        :props="{ max: new Date().toISOString().split('T')[0] }"
       />
       <FormBuilderFormField
         :ctx
-        type="Text"
+        type="Checkbox"
         path="isActive"
-        :emits="{
-          change: (value: boolean) => console.log('Checkbox changed:', value),
-        }"
       />
       <FormBuilderFormField
         :ctx
