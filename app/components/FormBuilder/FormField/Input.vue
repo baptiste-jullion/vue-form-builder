@@ -5,10 +5,10 @@ InputPropsGeneric = unknown,
 ModelValue = unknown
 "
 >
-import type { FieldPropSet, FormContext, FormContextKeys } from "../types";
+import type { FieldPropSet, FormContext, FormContextKeys } from "~/components/FormBuilder/types";
 import * as _ from "lodash-es";
 
-import { FormFieldInputs } from "../types";
+import { FormFieldInputs } from "~/components/FormBuilder/types";
 
 const { ctx, path } = defineProps<
   FieldPropSet<InputPropsGeneric> & {
@@ -42,6 +42,7 @@ function onValueChange(newValue: ModelValue) {
     :is="FormFieldInputs[type]"
     v-bind="props"
     :model-value="_.get(ctx.form, path)"
+    v-on="{ ...emits }"
     @update:model-value="onValueChange"
   />
 </template>
