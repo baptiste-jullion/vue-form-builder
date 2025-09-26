@@ -21,3 +21,7 @@ export type DeepKeyOf<T>
         }[keyof T & (string | number)];
 
 export type Arrayable<T> = T | T[];
+
+export type EmitsToOptions<T> = {
+  [K in keyof T as T[K] extends unknown[] ? K : never]?: (...args: T[K]) => void
+};
