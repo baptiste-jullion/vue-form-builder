@@ -85,9 +85,6 @@ const { values, ctx } = useForm({
         :ctx
         type="Number"
         path="height"
-        :props="{
-          step: 10,
-        }"
       />
       <FormBuilderField
         :ctx
