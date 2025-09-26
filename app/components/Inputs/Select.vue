@@ -7,8 +7,11 @@ export interface SelectProps<Data> {
   optionValue?: Data extends Record<string, unknown> ? keyof Data : never
 }
 
-defineProps<SelectProps<Option>>();
+export interface SelectEmits {
+}
 
+defineProps<SelectProps<Option>>();
+defineEmits<SelectEmits>();
 const model = defineModel<Option>();
 </script>
 

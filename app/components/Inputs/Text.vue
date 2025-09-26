@@ -2,8 +2,11 @@
 export interface TextProps {
 }
 
-const props = defineProps<TextProps>();
+export interface TextEmits {
+}
 
+const props = defineProps<TextProps>();
+defineEmits<TextEmits>();
 const model = defineModel<string>();
 </script>
 
