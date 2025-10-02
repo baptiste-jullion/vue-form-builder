@@ -47,7 +47,25 @@ function validate() {
       _.set(ctx.errors, path, z.treeifyError(error).errors);
     }
     else {
-      _.unset(ctx.errors, path);
+      unsetAndClean(ctx.errors, path);
+    }
+  }
+}
+
+function unsetAndClean(obj: object, path: string | string[]) {
+  _.unset(obj, path);
+
+  let parts = _.toPath(path);
+  while (parts.length) {
+    const parentPath = parts.slice(0, -1);
+    const parent = _.get(obj, parentPath);
+
+    if (_.isPlainObject(parent) && _.isEmpty(parent)) {
+      _.unset(obj, parentPath);
+      parts = parentPath;
+    }
+    else {
+      break;
     }
   }
 }
