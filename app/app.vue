@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import z from "zod";
 
 const schema = z.object({
@@ -8,7 +8,7 @@ const schema = z.object({
   isActive: z.boolean(),
   hobbies: z.enum(["reading", "gaming", "cooking", "traveling"]),
   address: z.object({
-    street: z.string().min(1, "Street is required").nullable(),
+    street: z.string().min(1, "Street is required"),
     city: z.string().min(1, "City is required"),
     state: z.string().min(2, "State must be at least 2 characters"),
     zip: z.string().length(5, "Zip code must be exactly 5 characters").nullish(),
@@ -52,9 +52,7 @@ const { values, ctx } = useForm({
   schema,
   config: {
     validation: {
-      trigger: {
-
-      },
+      trigger: {},
     },
   },
 });
@@ -65,72 +63,83 @@ const { values, ctx } = useForm({
     <FormBuilderForm v-model="values">
       <FormBuilderFieldInput
         :ctx
-        type="Select"
         path="hobbies"
         :props="{
           options: ['reading', 'gaming', 'cooking', 'traveling', 1, null],
         }"
-      />
-      <FormBuilderField
-        :ctx
-        type="Text"
-        path="name"
-      />
-      <FormBuilderField
-        :ctx
-        type="Text"
-        path="name"
-      />
-      <FormBuilderField
-        :ctx
-        type="Number"
-        path="height"
-      />
-      <FormBuilderField
-        :ctx
-        type="Date"
-        path="birthdate"
-      />
-      <FormBuilderField
-        :ctx
-        type="Checkbox"
-        path="isActive"
-      />
-      <FormBuilderField
-        :ctx
-        type="Text"
-        path="address.foo"
-      />
-      <FormBuilderField
-        :ctx
         type="Select"
+      />
+      <FormBuilderField
+        :ctx
+        path="name"
+        type="Text"
+      />
+      <FormBuilderField
+        :ctx
+        path="name"
+        type="Text"
+      />
+      <FormBuilderField
+        :ctx
+        path="height"
+        type="Number"
+      />
+      <FormBuilderField
+        :ctx
+        path="birthdate"
+        type="Date"
+      />
+      <FormBuilderField
+        :ctx
+        path="isActive"
+        type="Checkbox"
+      />
+      <FormBuilderField
+        :ctx
+        path="address.foo"
+        type="Text"
+      />
+      <FormBuilderField
+        :ctx
         path="hobbies"
         :props="{
           options: [{ label: 'Reading', value: 'reading' }, { label: 'Gaming', value: 'gaming' }],
           optionLabel: 'label',
           optionValue: 'value',
         }"
+        type="Select"
       />
       <div>
         <FormBuilderField
           :ctx
-          type="Text"
           path="address.street"
+          type="Text"
+        />
+        <FormBuilderField
+          :ctx
+          path="address.zip"
+          type="Text"
         />
         <FormBuilderFieldInput
-          type="Select"
+          :ctx
+          path="address.city"
           :props="{
             options: [{ label: 'City A', value: 'city_a' }, { label: 'City B', value: 'city_b' }],
             optionValue: 'value',
             optionLabel: 'label',
           }"
-          :ctx
-          path="address.city"
+          type="Select"
         />
       </div>
-      <FormBuilderFieldErrors :ctx path="name" />
     </FormBuilderForm>
 
     <pre>{{ { formValues: ctx.values, errors: ctx.errors } }}</pre>
   </div>
 </template>
+
+<style>
+body {
+  background: #0f0f0f;
+  color: white;
+}
+</style>

@@ -1,13 +1,12 @@
-<script setup lang="ts" generic="
+<script generic="
 Context extends FormContext,
 Keys extends FormContextKeys<Context>,
 InputPropsGeneric = unknown,
 ModelValue = unknown
-"
+" lang="ts" setup
 >
 import type { FieldPropSet, FormContext, FormContextKeys } from "~/components/FormBuilder/types";
 import * as _ from "lodash-es";
-
 import z from "zod";
 import { FieldInputs } from "~/components/FormBuilder/types";
 
@@ -36,10 +35,10 @@ function onValueChange(newValue: ModelValue) {
     _.set(ctx.values, path, newValue);
   }
 
-  validate();
+  validateSelf();
 }
 
-function validate() {
+function validateSelf() {
   const validator = getValidatorByPath(ctx.schema, path);
   if (validator) {
     const error = validator.safeParse(_.get(ctx.values, path)).error;
@@ -74,8 +73,8 @@ function unsetAndClean(obj: object, path: string | string[]) {
 <template>
   <component
     :is="FieldInputs[type]"
-    v-bind="props"
     :model-value="_.get(ctx.values, path)"
+    v-bind="props"
     v-on="{ ...emits }"
     @update:model-value="onValueChange"
   />
