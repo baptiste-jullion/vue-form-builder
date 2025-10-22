@@ -3,9 +3,16 @@ import antfu from "@antfu/eslint-config";
 
 export default antfu(
   {
-    rules: {
+    "rules": {
       "style/quotes": ["warn", "double"],
       "style/semi": ["warn", "always"],
+      "vue/attributes-order": [
+        "warn",
+        {
+          alphabetical: true,
+        },
+      ],
     },
+    "vue/attribute-hyphenation": ["warn", "always"],
   },
 );
