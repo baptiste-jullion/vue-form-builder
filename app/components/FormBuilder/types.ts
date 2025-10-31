@@ -35,5 +35,5 @@ export interface FormContext {
 }
 
 export type FormContextKeys<Context extends FormContext> = DeepKeyOf<
-z.infer<NonNullable<Context["schema"]>>
+  z.infer<NonNullable<Context["schema"]>>
 >;
