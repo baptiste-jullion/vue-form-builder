@@ -73,8 +73,9 @@ function unsetAndClean(obj: object, path: string | string[]) {
 <template>
   <component
     :is="FieldInputs[type]"
-    :model-value="_.get(ctx.values, path)"
     v-bind="props"
+    :id="`input-${path}`"
+    :model-value="_.get(ctx.values, path)"
     v-on="{ ...emits }"
     @update:model-value="onValueChange"
   />
