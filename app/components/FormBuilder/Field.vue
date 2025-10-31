@@ -13,9 +13,9 @@ const props = defineProps<FieldPropSet<InputPropsGeneric> & {
 </script>
 
 <template>
-  <FormBuilderFieldLabel :path :ctx />
+  <FormBuilderFieldLabel :ctx :path />
   <FormBuilderFieldInput
     v-bind="{ ...props }"
   />
-  <FormBuilderFieldErrors :path :ctx />
+  <FormBuilderFieldErrors :ctx :path />
 </template>
