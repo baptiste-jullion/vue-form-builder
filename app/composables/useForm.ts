@@ -5,6 +5,7 @@ import { ZodObject, ZodRecord } from "zod";
 export default function useForm<T extends object>(
   options: UseFormOptions<T>,
 ) {
+  const formId = `form-${useId().replace("v-", "")}`;
   const initialValues = reactive(_.cloneDeep(options.initialValues) || {});
   const values = reactive({ ...initialValues });
   const errors = reactive({});
@@ -58,6 +59,7 @@ export default function useForm<T extends object>(
   return {
     values,
     ctx: {
+      formId,
       schema: options.schema,
       initialValues,
       values,
