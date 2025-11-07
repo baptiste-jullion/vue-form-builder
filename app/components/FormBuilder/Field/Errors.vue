@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="
 Context extends FormContext,
-Keys extends FormContextKeys<Context>,
+Keys extends FormContextKeys<Context>
 "
 >
 import type { FormContext, FormContextKeys } from "~/components/FormBuilder/types";
