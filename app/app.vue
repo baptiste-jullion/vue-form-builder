@@ -11,6 +11,12 @@ const schema = z.object({
   height: z.number().min(100).max(250).nullable(),
   id: z.uuid(),
   name: z.string().min(3),
+  label: z.partialRecord(z.enum(["fr", "en"]), z.string().min(5).optional()).refine(
+    r => Object.keys(r).length <= 0,
+    {
+      message: "At least one localized label is required",
+    },
+  ),
 });
 
 const { values, ctx, methods: { reset, validate } } = useForm({
@@ -23,6 +29,7 @@ const { values, ctx, methods: { reset, validate } } = useForm({
 </script>
 
 <template>
+  <pre>{{ ctx.formId }}</pre>
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
     <FormBuilderForm v-model="values">
       <FormBuilderField :ctx path="address.city" type="Text" />
@@ -32,6 +39,7 @@ const { values, ctx, methods: { reset, validate } } = useForm({
       <FormBuilderField :ctx path="height" type="Number" />
       <FormBuilderField :ctx path="id" type="Text" />
       <FormBuilderField :ctx path="name" type="Text" />
+      <FormBuilderField :ctx localized path="label" type="Text" />
     </FormBuilderForm>
 
     <div>
