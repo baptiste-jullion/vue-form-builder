@@ -1,6 +1,6 @@
 import type { ZodType } from "zod";
 import * as _ from "lodash-es";
-import { ZodObject } from "zod";
+import { ZodObject, ZodRecord } from "zod";
 
 export default function useForm<T extends object>(
   options: UseFormOptions<T>,
@@ -74,7 +74,7 @@ export default function useForm<T extends object>(
 }
 
 export function getValidatorByPath<T extends object>(
-  schema: ZodType<T> | undefined,
+  schema: ZodType<T> | ZodRecord<any, any> | undefined,
   path: string,
 ) {
   if (!schema)
@@ -86,6 +86,9 @@ export function getValidatorByPath<T extends object>(
   for (const part of parts) {
     if (current instanceof ZodObject) {
       current = current.shape[part];
+    }
+    else if (current instanceof ZodRecord) {
+      current = current.valueType;
     }
     else {
       return null;
