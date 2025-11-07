@@ -23,7 +23,7 @@ const { values, ctx, methods: { reset, validate } } = useForm({
 </script>
 
 <template>
-  <div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
     <FormBuilderForm v-model="values">
       <FormBuilderField :ctx path="address.city" type="Text" />
       <FormBuilderField :ctx path="birthdate" type="Date" />

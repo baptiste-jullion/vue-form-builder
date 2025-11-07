@@ -15,5 +15,7 @@ const errors = computed(() => _.get(ctx.errors, path));
 </script>
 
 <template>
-  <p>errors: {{ errors }}</p>
+  <p v-if="errors?.length">
+    errors: {{ errors }}
+  </p>
 </template>
