@@ -1,6 +1,9 @@
 import type { ZodType } from "zod";
 import * as _ from "lodash-es";
-import { ZodObject, ZodRecord } from "zod";
+import {
+  ZodObject,
+  ZodRecord,
+} from "zod";
 
 export default function useForm<T extends object>(
   options: UseFormOptions<T>,
@@ -17,7 +20,10 @@ export default function useForm<T extends object>(
   });
 
   function reset(
-    overrideOptions?: { overrideValues?: Partial<T>, keepInitialValues?: boolean },
+    overrideOptions?: {
+      keepInitialValues?: boolean
+      overrideValues?: Partial<T>
+    },
   ) {
     clearObject(errors);
     clearObject(values);
@@ -57,21 +63,19 @@ export default function useForm<T extends object>(
   }
 
   return {
-    values,
     ctx: {
-      formId,
-      schema: options.schema,
-      initialValues,
-      values,
       errors,
-      meta: {
-        dirty,
-      },
+      formId,
+      initialValues,
+      meta: { dirty },
+      schema: options.schema,
+      values,
     },
     methods: {
       reset,
       validate,
     },
+    values,
   };
 }
 

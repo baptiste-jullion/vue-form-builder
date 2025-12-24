@@ -3,10 +3,16 @@ Context extends FormContext,
 Keys extends FormContextKeys<Context>
 "
 >
-import type { FormContext, FormContextKeys } from "~/components/FormBuilder/types";
+import type {
+  FormContext,
+  FormContextKeys,
+} from "~/components/FormBuilder/types";
 import * as _ from "lodash-es";
 
-const { ctx, path } = defineProps<{
+const {
+  ctx,
+  path,
+} = defineProps<{
   ctx: Context
   path: Keys
 }>();

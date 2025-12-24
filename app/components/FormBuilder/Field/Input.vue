@@ -5,12 +5,19 @@ InputPropsGeneric = unknown,
 ModelValue = unknown
 " lang="ts" setup
 >
-import type { FieldPropSet, FormContext, FormContextKeys } from "~/components/FormBuilder/types";
+import type {
+  FieldPropSet,
+  FormContext,
+  FormContextKeys,
+} from "~/components/FormBuilder/types";
 import * as _ from "lodash-es";
 import z from "zod";
 import { FieldInputs } from "~/components/FormBuilder/types";
 
-const { ctx, path } = defineProps<
+const {
+  ctx,
+  path,
+} = defineProps<
   FieldPropSet<InputPropsGeneric> & {
     ctx: Context
     path: Keys

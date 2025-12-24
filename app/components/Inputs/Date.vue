@@ -10,5 +10,9 @@ const model = defineModel<string>();
 </script>
 
 <template>
-  <input v-model="model" type="date" v-bind="{ ...props }">
+  <input
+    v-model="model"
+    type="date"
+    v-bind="{ ...props }"
+  >
 </template>

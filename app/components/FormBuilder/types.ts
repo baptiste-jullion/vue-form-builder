@@ -1,9 +1,21 @@
-import type { z, ZodType } from "zod";
-import type { CheckboxEmits, CheckboxProps } from "~/components/Inputs/Checkbox.vue";
+import type {
+  z,
+  ZodType,
+} from "zod";
+import type {
+  CheckboxEmits,
+  CheckboxProps,
+} from "~/components/Inputs/Checkbox.vue";
 import type { DateProps } from "~/components/Inputs/Date.vue";
 import type { NumberProps } from "~/components/Inputs/Number.vue";
-import type { SelectEmits, SelectProps } from "~/components/Inputs/Select.vue";
-import type { TextEmits, TextProps } from "~/components/Inputs/Text.vue";
+import type {
+  SelectEmits,
+  SelectProps,
+} from "~/components/Inputs/Select.vue";
+import type {
+  TextEmits,
+  TextProps,
+} from "~/components/Inputs/Text.vue";
 import Checkbox from "~/components/Inputs/Checkbox.vue";
 import Date from "~/components/Inputs/Date.vue";
 import Number from "~/components/Inputs/Number.vue";
@@ -11,21 +23,41 @@ import Select from "~/components/Inputs/Select.vue";
 import Text from "~/components/Inputs/Text.vue";
 
 export const FieldInputs = {
+  Checkbox,
   Date,
+  Number,
   Select,
   Text,
-  Number,
-  Checkbox,
 } as const;
 
 export type FieldInputsKeys = keyof typeof FieldInputs;
 
 export type FieldPropSet<I>
-  = | { type: "Select", props?: SelectProps<I>, emits?: Partial<EmitsToOptions<SelectEmits>> }
-    | { type: "Text", props?: TextProps, emits?: Partial<EmitsToOptions<TextEmits>> }
-    | { type: "Date", props?: DateProps, emits?: object }
-    | { type: "Number", props?: NumberProps, emits?: object }
-    | { type: "Checkbox", props?: CheckboxProps, emits?: Partial<EmitsToOptions<CheckboxEmits>> }
+  = | {
+    emits?: Partial<EmitsToOptions<SelectEmits>>
+    props?: SelectProps<I>
+    type: "Select"
+  }
+  | {
+    emits?: Partial<EmitsToOptions<TextEmits>>
+    props?: TextProps
+    type: "Text"
+  }
+  | {
+    emits?: object
+    props?: DateProps
+    type: "Date"
+  }
+  | {
+    emits?: object
+    props?: NumberProps
+    type: "Number"
+  }
+  | {
+    emits?: Partial<EmitsToOptions<CheckboxEmits>>
+    props?: CheckboxProps
+    type: "Checkbox"
+  }
     ;
 
 export interface FormContext {

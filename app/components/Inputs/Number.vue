@@ -1,11 +1,14 @@
 <script setup lang="ts">
-export interface NumberProps {
-}
+export interface NumberProps {}
 
 const props = defineProps<NumberProps>();
 const model = defineModel<number>();
 </script>
 
 <template>
-  <input v-model="model" type="number" v-bind="{ ...props }">
+  <input
+    v-model="model"
+    type="number"
+    v-bind="{ ...props }"
+  >
 </template>
